@@ -42,25 +42,25 @@ void display_layer_update_callback(Layer *me, GContext* ctx) {
   if (hour == 0) {
     hour = 12;
   }
-  int i, j, height;
+  int col, row, height;
 
-  for (i = 0; i < 12; i++) {
-    for (j = 0; j < 6; j++) {
-      height = i;
+  for (col = 0; col < 12; col++) {
+    for (row = 0; row < 6; row++) {
+      height = col;
       /* Hour mode */
-      if (j == 0) {
-        if (12 - i > hour) {
+      if (row == 0) {
+        if (12 - col > hour) {
           continue;
         }
       } else {
         if (minutes++ < t.tm_min) {
-          height = (11 - i);
+          height = (11 - col);
         } else {
           continue;
         }
       }
 
-      graphics_fill_rect(ctx, cell_location(j, height), 0, GCornerNone);
+      graphics_fill_rect(ctx, cell_location(row, height), 0, GCornerNone);
     }
   }
 
