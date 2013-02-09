@@ -8,8 +8,7 @@ Window window;
 
 Layer display_layer;
 
-TextLayer hour_numbers_layer[12]; // The word indicators
-TextLayer minute_numbers_layer[12]; // The word indicators
+BmpContainer background_image_container;
 
 #define CELL_WIDTH 8
 #define CELL_HEIGHT 8
@@ -78,45 +77,34 @@ void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t) {
 void handle_init(AppContextRef ctx) {
   (void)ctx;
 
+
   window_init(&window, "Pimpin Ain't Easy");
   window_stack_push(&window, true);
 
+  resource_init_current_app(&APP_RESOURCES);
+
   window_set_background_color(&window, GColorBlack);
 
-  // Init the layer for the display
+  bmp_init_container(RESOURCE_ID_IMAGE_BACKGROUND, &background_image_container);
+  layer_add_child(&window.layer, &background_image_container.layer.layer);
+
   layer_init(&display_layer, window.layer.frame);
   display_layer.update_proc = &display_layer_update_callback;
+
   layer_add_child(&window.layer, &display_layer);
+}
 
-  int i;
-  const char *hour[12] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-  const char *minute[12] = {"5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60"};
+void handle_deinit(AppContextRef ctx) {
+  (void)ctx;
 
-  for (i = 0; i < 12; i++) {
-    if (i < 9) {
-      text_layer_init(&hour_numbers_layer[i], GRect(23, (148 - (i * 13)), 36, 24));
-    } else {
-      text_layer_init(&hour_numbers_layer[i], GRect(17, (148 - (i * 13)), 36, 24));
-    }
-    text_layer_set_text_color(&hour_numbers_layer[i], GColorWhite);
-    text_layer_set_background_color(&hour_numbers_layer[i], GColorClear);
-    layer_add_child(&window.layer, &hour_numbers_layer[i].layer);
-    text_layer_set_text(&hour_numbers_layer[i], hour[i]);
-
-    text_layer_init(&minute_numbers_layer[i], GRect(110, (148 - (i * 13)), 36, 24));
-    text_layer_set_text_color(&minute_numbers_layer[i], GColorWhite);
-    text_layer_set_background_color(&minute_numbers_layer[i], GColorClear);
-    layer_add_child(&window.layer, &minute_numbers_layer[i].layer);
-    text_layer_set_text(&minute_numbers_layer[i], minute[i]);
-  }
-
-
+  bmp_deinit_container(&background_image_container);
 }
 
 
 void pbl_main(void *params) {
   PebbleAppHandlers handlers = {
     .init_handler = &handle_init,
+    .deinit_handler = &handle_deinit,
 
     .tick_info = {
       .tick_handler = &handle_minute_tick,

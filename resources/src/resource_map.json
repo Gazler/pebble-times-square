@@ -1,11 +1,16 @@
 
-{"friendlyVersion": "0.0.2",
- "versionDefName": "VERSION",
+{"friendlyVersion": "0.0.3",
+ "versionDefName": "APP_RESOURCES",
  "media": [
 	   {
 	    "type":"png",
 	    "defName":"IMAGE_MENU_ICON",
 	    "file":"images/pimpin.png"
+	   },
+	   {
+	    "type":"png",
+	    "defName":"IMAGE_BACKGROUND",
+	    "file":"images/background.png"
 	   }
 	  ]
 }
