@@ -2,7 +2,7 @@
 #include "pebble_app.h"
 #include "pebble_fonts.h"
 
-PBL_APP_INFO("Pimpin Ain't Easy", "Gazler", 1, RESOURCE_ID_IMAGE_MENU_ICON, APP_INFO_WATCH_FACE);
+PBL_APP_INFO("Times Square", "Gazler", 1, RESOURCE_ID_IMAGE_MENU_ICON, APP_INFO_WATCH_FACE);
 
 Window window;
 
@@ -78,7 +78,7 @@ void handle_init(AppContextRef ctx) {
   (void)ctx;
 
 
-  window_init(&window, "Pimpin Ain't Easy");
+  window_init(&window, "Times Square");
   window_stack_push(&window, true);
 
   resource_init_current_app(&APP_RESOURCES);
