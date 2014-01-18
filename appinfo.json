@@ -1,0 +1,28 @@
+{
+  "uuid": "cb50921a-6086-4c99-b976-dcd8de364a4e",
+  "shortName": "Times Square",
+  "longName": "Times Square",
+  "companyName": "Gazler",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+ "resources": {
+    "media": [
+        {
+          "type": "png",
+          "name": "IMAGE_MENU_ICON",
+          "file": "src/images/times-square.png"
+        },
+        {
+          "type": "png",
+          "name": "IMAGE_BACKGROUND",
+          "file": "src/images/background.png"
+        }
+      ]
+  }
+}
